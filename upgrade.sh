@@ -18,3 +18,7 @@ class TugboatCli < Formula
   end
 end
 EOF
+
+git diff Formula/tugboat-cli.rb
+git add Formula/tugboat-cli.rb
+git commit -m v${VERSION}
