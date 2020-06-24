@@ -1,25 +1,12 @@
 # Tugboat Homebrew Tap
 
-To enable this Homebrew Tap
+## Language Matters
 
-```sh
-brew tap tugboatqa/tugboat
-```
+Tugboat is updating its language in an effort to be more inclusive.
+Part of that effort includes renaming our default git branches from
+`master` to `main`. Read more at
 
-## Tugboat CLI
+* https://www.tugboat.qa/language-matters
 
-To install the Tugboat CLI using this Tap
-
-```sh
-brew install tugboat-cli
-```
-
-To upgrade the Tugboat CLI to the latest version
-
-```sh
-brew upgrade tugboat-cli
-```
-
-## References
-
-* https://docs.brew.sh/Taps
+This `master` branch acts as a placeholder for instructions on how to
+upgrade existing installations of the Tugboat CLI to the new branch.

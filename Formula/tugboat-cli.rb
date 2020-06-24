@@ -2,12 +2,21 @@ class TugboatCli < Formula
   desc "Tugboat CLI"
   homepage "https://tugboat.qa"
   url "https://dashboard.tugboat.qa/cli/macos/tugboat.tar.gz"
-  sha256 "21f6a32b8f45869687a82d7b80764babf2d5f9fe64fa7c8b6519eb1d354ac83f"
-  version "2.20.32"
-  def install
-    bin.install "tugboat"
-  end
-  test do
-    system "tugboat"
-  end
+  version "2.20.33"
+
+  ohai "Language Matters"
+
+  opoo "Tugboat is updating its language in an effort to be more inclusive."
+  opoo "Part of that effort includes renaming our default git branches from"
+  opoo "'master' to 'main'. Read more at"
+  opoo ""
+  opoo "  https://www.tugboat.qa/language-matters"
+  opoo ""
+
+  odie """To upgrade tugboat-cli, retap it with:
+
+    brew untap tugboatqa/tugboat
+    brew tap tugboatqa/tugboat
+    brew upgrade tugboat-cli"""
+
 end
