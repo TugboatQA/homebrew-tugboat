@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=`curl https://dashboard.tugboat.qa/_version`
+VERSION=`curl https://dashboard.tugboat.qa/_status | grep Dashboard\ OK | awk '{print $NF}'`
 SHA=`curl -s https://dashboard.tugboat.qa/cli/macos/tugboat.tar.gz | shasum -a 256 | awk '{print $1}'`
 
 cat << EOF > Formula/tugboat-cli.rb
