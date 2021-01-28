@@ -21,5 +21,5 @@ EOF
 
 git diff Formula/tugboat-cli.rb
 git add Formula/tugboat-cli.rb
-#git commit -m v${VERSION}
-#git push
+git commit -m v${VERSION}
+git push
