@@ -2,8 +2,8 @@ class TugboatCli < Formula
   desc "Tugboat CLI"
   homepage "https://tugboat.qa"
   url "https://dashboard.tugboat.qa/cli/macos/tugboat.tar.gz"
-  sha256 "9c13594a58c33908a21d01f80f99a27ac79bdd620030d53d53dc8b5e50df998e"
-  version "2.21.17"
+  sha256 "81aeb9876f7cc03861bc3969202e477171c9f1cf595790bbf0d723a39a965965"
+  version "2.21.18"
   def install
     bin.install "tugboat"
   end
