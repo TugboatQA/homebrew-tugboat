@@ -22,5 +22,5 @@ EOF
 
 git diff Formula/tugboat-cli.rb
 git add Formula/tugboat-cli.rb
-git commit --gpg-sign --message --allow-empty v${VERSION}
+git commit --gpg-sign --allow-empty --message v${VERSION}
 git push
