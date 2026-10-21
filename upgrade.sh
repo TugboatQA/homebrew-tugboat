@@ -7,14 +7,13 @@ SHA_ARM=`curl -s https://assets.tugboatqa.com/cli/macos-arm64/tugboat.tar.gz | s
 
 cat << EOF > Formula/tugboat-cli.rb
 class TugboatCli < Formula
-  desc "Tugboat CLI"
+  desc "Command-line interface for Tugboat"
   homepage "https://www.tugboatqa.com"
   version "${VERSION}"
-  on_arm do
+  if Hardware::CPU.arm?
     url "https://assets.tugboatqa.com/cli/macos-arm64/tugboat.tar.gz"
     sha256 "${SHA_ARM}"
-  end
-  on_intel do
+  else
     url "https://assets.tugboatqa.com/cli/macos/tugboat.tar.gz"
     sha256 "${SHA_INTEL}"
   end
