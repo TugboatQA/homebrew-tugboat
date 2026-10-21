@@ -1,0 +1,54 @@
+name: Brew Install
+
+# Called by integration.yml as part of the "Integration" required status check.
+#
+# The formula's tarball URLs are unversioned, so each Tugboat release changes
+# their checksums. Until upgrade.sh runs, this check fails on the checksum. Run
+# upgrade.sh to fix it.
+
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  brew-install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+    steps:
+      # Taps this repository at the pull request commit, so no checkout step is
+      # needed.
+      - name: Set up Homebrew
+        id: setup-homebrew
+        uses: Homebrew/actions/setup-homebrew@0fdc2c96a16d9f945f7e1577784302fd27a549a9 # main
+
+      - name: brew install
+        env:
+          TAP_NAME: ${{ steps.setup-homebrew.outputs.tap-name }}
+        run: brew install "${TAP_NAME}/tugboat-cli"
+
+      - name: brew test
+        env:
+          TAP_NAME: ${{ steps.setup-homebrew.outputs.tap-name }}
+        run: brew test "${TAP_NAME}/tugboat-cli"
+
+      # Catches the Intel binary being installed on Apple Silicon, where it
+      # would still run under Rosetta.
+      - name: Check binary architecture
+        run: |
+          arch="$(uname -m)"
+          file "$(brew --prefix)/bin/tugboat" | tee /dev/stderr | grep -q "executable ${arch}$"
+
+      - name: Check version
+        env:
+          TAP_NAME: ${{ steps.setup-homebrew.outputs.tap-name }}
+        run: |
+          expected="$(brew info --json=v2 "${TAP_NAME}/tugboat-cli" | jq -r '.formulae[0].versions.stable')"
+          actual="$(tugboat --version)"
+          echo "Formula: ${expected}, installed: ${actual}"
+          [ "${expected}" = "${actual}" ]

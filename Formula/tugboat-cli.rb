@@ -13,6 +13,6 @@ class TugboatCli < Formula
     bin.install "tugboat"
   end
   test do
-    system "tugboat"
+    assert_match version.to_s, shell_output("#{bin}/tugboat --version")
   end
 end
